@@ -1,0 +1,121 @@
+class LinkedList {
+    field Node head;
+
+    constructor LinkedList new() {
+        let head = null;
+        return this;
+    }
+
+    method Alien firstAlien(){
+        return head.getAlien();
+    }
+
+    method void add(Alien newAlien) {
+        var Node newNode;
+        var Node current;
+        let newNode = Node.new(newAlien);
+        if (head = null) {
+            let head = newNode;
+        } else {
+            let current = head;
+            while (~(current.getNext() = null)) {
+                let current = current.getNext();
+            }
+            do current.setNext(newNode);
+        }
+        return;
+    }
+
+
+    method void moverAlien(){
+        var Node currentNode,NodeChangeDirection;  
+        var Alien currentAlien;
+        var Alien AlienChangeDirection;
+
+    
+        let currentNode = head;
+        while(~(currentNode = null)){
+            let currentAlien = currentNode.getAlien();
+            if((currentAlien.getX() > 450) | (currentAlien.getX() < 15)){
+                let NodeChangeDirection = head;
+                while (~(NodeChangeDirection = null)){
+                    let AlienChangeDirection = NodeChangeDirection.getAlien();
+                    do AlienChangeDirection.changeDirection();
+                    do AlienChangeDirection.movement();
+                    let NodeChangeDirection = NodeChangeDirection.getNext();
+                }   
+            }
+            do currentAlien.movement();
+            let currentNode = currentNode.getNext();
+        }
+        return;
+    }
+    
+
+    method void removeSpecificAlien(int n) {
+        var Node current;   
+        var Node previous;
+
+        let current = head;
+        let previous = null;
+  
+
+        if ((head.getIndex() = n)){
+            let head = current.getNext();
+            do current.dispose();
+            return;
+        }
+        while (~(current = null )) {
+            if (current.getIndex() = n){
+                do previous.setNext(current.getNext());
+                do current.dispose();
+                return;
+            }
+            let previous = current;
+            let current = current.getNext();
+        }
+        return;
+    }
+
+
+
+    method boolean shootColisionAlien(Shoot playerShoot) {
+        var Node currentNode;
+        var Alien currentAlien;
+        var int posX, posY;
+
+        let currentNode = head;
+        if (playerShoot.getY() < 126) {
+            while (~(currentNode = null)) {
+                let currentAlien = currentNode.getAlien();
+                let posX = currentAlien.getX();
+                let posY = currentAlien.getY();
+                
+                if ((posX - 2 > playerShoot.getX()) & (playerShoot.getX() < posX + 2) & (posY - 2 > playerShoot.getY()) & (playerShoot.getY() < posY + 2)) {
+                    do removeSpecificAlien(currentAlien.getIndex());
+                    do playerShoot.dispose();
+                    return true;
+                }
+                let currentNode = currentNode.getNext();
+            }
+        }
+        return false;
+    }
+
+    method Alien getNextAlien(Alien alien){
+        var Node current,tempNode;   
+
+        let current = head;
+        while (~(current.getNext() = null )) {
+            if (current.getAlien() = alien){
+                let tempNode = current.getNext();
+                return tempNode.getAlien();
+            }
+            let tempNode = current.getAlien();
+            let current = current.getNext();
+        }
+        return head.getAlien();
+    }
+
+
+}

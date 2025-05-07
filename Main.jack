@@ -1,0 +1,14 @@
+
+class Main {
+
+    function void main() {
+        var JuegoNave game;
+
+        let game = JuegoNave.new();
+        do Output.moveCursor(0, 25);
+        do Output.printString("SPACE jii");
+        do game.run();
+        do game.dispose();
+        return;
+    }
+}
